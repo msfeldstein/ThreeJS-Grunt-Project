@@ -18,7 +18,7 @@ module.exports = (grunt) ->
     coffee:
       compile:
         files:
-          'build/script/out.js' : 'src/script/*.coffee'
+          'build/script/coffee.js' : 'src/script/*.coffee'
         options:
           bare: true
 
@@ -39,8 +39,6 @@ module.exports = (grunt) ->
           [{ expand: true, cwd: 'src', src: ['index.html', '**/*.js', '**/*.css'], dest: 'out/'}]
 
     watch:
-      options:
-        livereload: true
       copy:
         files: ['src/index.html', 'src/**/*.js']
         tasks: ['copy']
@@ -50,6 +48,8 @@ module.exports = (grunt) ->
       concat:
         files: 'build/script/*'
         tasks: ['concat']
+        options:
+          livereload: true
 
   grunt.registerTask 'serve', () ->
     grunt.task.run [

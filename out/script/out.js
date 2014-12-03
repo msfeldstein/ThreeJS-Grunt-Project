@@ -9194,7 +9194,7 @@ return jQuery;
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-
+console.log("THREE", THREE)
 var THREE = { REVISION: '69' };
 
 // browserify support
@@ -43919,5 +43919,42 @@ THREE.MorphBlendMesh.prototype.update = function ( delta ) {
 
 };
 
+THREE.test = 32
+var animate, camera, renderer, scene;
 
-console.log("better");
+renderer = scene = camera = null;
+
+$(function() {
+  var $container, ASPECT, FAR, HEIGHT, NEAR, VIEW_ANGLE, WIDTH, geometry, light, material, sphere;
+  $container = $("#container");
+  WIDTH = window.innerWidth;
+  HEIGHT = window.innerHeight;
+  VIEW_ANGLE = 75;
+  ASPECT = WIDTH / HEIGHT;
+  NEAR = 0.1;
+  FAR = 10000;
+  renderer = new THREE.WebGLRenderer();
+  camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+  scene = new THREE.Scene;
+  scene.add(camera);
+  camera.position.z = 300;
+  renderer.setSize(WIDTH, HEIGHT);
+  geometry = new THREE.SphereGeometry(50, 16, 16);
+  material = new THREE.MeshLambertMaterial({
+    color: 0xCC0000
+  });
+  sphere = new THREE.Mesh(geometry, material);
+  scene.add(sphere);
+  light = new THREE.PointLight(0xFFFFFF);
+  light.position.x = 10;
+  light.position.y = 50;
+  light.position.z = 130;
+  scene.add(light);
+  $container.append(renderer.domElement);
+  return animate();
+});
+
+animate = function() {
+  renderer.render(scene, camera);
+  return requestAnimationFrame(animate);
+};
