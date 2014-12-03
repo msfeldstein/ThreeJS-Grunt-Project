@@ -1,0 +1,5 @@
+Base Skeleton for a threejs project using coffeescript.
+
+> npm install
+> bower install
+> grunt serve
