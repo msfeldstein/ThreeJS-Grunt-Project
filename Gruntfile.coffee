@@ -1,7 +1,9 @@
 module.exports = (grunt) ->
+  @loadNpmTasks "grunt-contrib-clean"
   @loadNpmTasks "grunt-contrib-coffee"
   @loadNpmTasks "grunt-contrib-copy"
   @loadNpmTasks "grunt-contrib-watch"
+
 
   grunt.initConfig
     coffee:
@@ -10,6 +12,8 @@ module.exports = (grunt) ->
           'out/script/out.js' : 'src/script/*.coffee'
         options:
           bare: true
+
+    clean: ['out/*']
     
     copy:
       main:
@@ -26,6 +30,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'serve', () ->
     grunt.task.run [
+      'clean',
       'coffee',
       'copy',
       'watch'
