@@ -5,21 +5,27 @@ module.exports = (grunt) ->
   @loadNpmTasks "grunt-contrib-watch"
   @loadNpmTasks "grunt-contrib-connect"
   @loadNpmTasks "grunt-bower-concat"
+  @loadNpmTasks "grunt-contrib-concat"
 
   grunt.initConfig
-    clean: ['out/*']
-    
+    clean: ['out/*', 'build/*']
+
     bower_concat:
       all:
-        dest: 'out/script/_bower.js'
-        cssDest: 'out/style/_bower.css'
+        dest: 'build/script/_bower.js'
+        cssDest: 'build/style/_bower.css'
 
     coffee:
       compile:
         files:
-          'out/script/out.js' : 'src/script/*.coffee'
+          'build/script/out.js' : 'src/script/*.coffee'
         options:
           bare: true
+
+    concat:
+      out:
+        src: 'build/script/**/*.js'
+        dest: 'out/script/out.js'
 
     connect:
       server:
@@ -41,6 +47,9 @@ module.exports = (grunt) ->
       coffee:
         files: 'src/script/*.coffee'
         tasks: ['coffee']
+      concat:
+        files: 'build/script/*'
+        tasks: ['concat']
 
   grunt.registerTask 'serve', () ->
     grunt.task.run [
@@ -48,6 +57,7 @@ module.exports = (grunt) ->
       'bower_concat'
       'coffee',
       'copy',
+      'concat'
       'connect',
       'watch'
     ]
