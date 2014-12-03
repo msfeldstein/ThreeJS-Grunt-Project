@@ -1,0 +1,22 @@
+{
+  "name": "threejs-skeleton",
+  "version": "0.0.0",
+  "authors": [
+    "Michael Feldstein <msfeldstein@gmail.com>"
+  ],
+  "description": "ThreeJS Skeleton with coffeescript",
+  "main": "src/index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "threejs": "*"
+  }
+}
