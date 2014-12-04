@@ -32,15 +32,19 @@ module.exports = (grunt) ->
         options:
           base: 'out'
           open: true
+          livereload: true
     
     copy:
       main:
-        files:
-          [{ expand: true, cwd: 'src', src: ['index.html', '**/*.js', '**/*.css'], dest: 'out/'}]
+        files: [
+            { expand: true, cwd: 'src', src: ['index.html', '**/*.css'], dest: 'out/'}
+            { expand: true, cwd: 'src', src: ['**/*.js'], dest: 'build/'}
+            { expand: true, cwd: 'src', src: ['raw/**/*'], dest: 'out'}
+          ]
 
     watch:
       copy:
-        files: ['src/index.html', 'src/**/*.js']
+        files: ['src/index.html', 'src/**/*.js', 'raw/**/*']
         tasks: ['copy']
       coffee:
         files: 'src/script/*.coffee'
